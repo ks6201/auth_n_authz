@@ -20,16 +20,20 @@ jobs:
       - name: Deploy on VPS
         run: |
           ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes -T \
-            ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << EOF
-            set -e
-            
-            source ~/.bashrc
+            ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
+          set -e
 
-            cd ~/projects/auth_n_authz
-            git fetch origin
-            git reset --hard origin/master
+          # Export everything sourced
+          set -a
+          source ~/.bashrc
+          set +a
 
-            docker compose build
-            docker compose up -d
-            docker image prune -f
+          cd ~/projects/auth_n_authz
+          git fetch origin
+          git reset --hard origin/master
+
+          docker compose build
+          docker compose up -d
+          docker image prune -f
           EOF
+
