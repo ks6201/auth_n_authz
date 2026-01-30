@@ -18,16 +18,10 @@ jobs:
           ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
 
       - name: Deploy on VPS
-        env:
-          JWT_SEC: ${{ secrets.JWT_SEC }}
-          AUTH_N_AUTHZ_DB_URL: ${{ secrets.AUTH_N_AUTHZ_DB_URL }}
         run: |
           ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes -T \
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
           set -e
-
-          export JWT_SEC
-          export AUTH_N_AUTHZ_DB_URL
 
           cd ~/projects/auth_n_authz 
           git fetch origin 
