@@ -1,0 +1,24 @@
+services:
+  app:
+    build: .
+    image: auth_n_authz
+    ports:
+      - "8080:8080"
+    environment:
+      JWT_SEC: ${JWT_SEC}
+      REDIS_URI: redis://redis:6379
+      AUTH_N_AUTHZ_DB_URL: ${AUTH_N_AUTHZ_DB_URL}
+    depends_on:
+      - redis
+    networks:
+      - local_net
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    networks:
+      - local_net
+
+networks:
+  local_net:
+    driver: bridge

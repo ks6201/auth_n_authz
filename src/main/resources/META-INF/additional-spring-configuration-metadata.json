@@ -1,0 +1,112 @@
+{"properties": [
+  {
+    "name": "spring.datasource.url",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.url'"
+  },
+  {
+    "name": "spring.datasource.driver-class-name",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.driver-class-name'"
+  },
+  {
+    "name": "spring.jpa.hibernate.ddl-auto",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.jpa.hibernate.ddl-auto'"
+  },
+  {
+    "name": "spring.jpa.show-sql",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.jpa.show-sql'"
+  },
+  {
+    "name": "spring.jpa.properties.hibernate.dialect",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.jpa.properties.hibernate.dialect'"
+  },
+  {
+    "name": "redis.url",
+    "type": "java.lang.String",
+    "description": "A description for 'redis.url'"
+  },
+  {
+    "name": "jwt.secret",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.secret'"
+  },
+  {
+    "name": ".level",
+    "type": "java.lang.String",
+    "description": "A description for '.level'"
+  },
+  {
+    "name": "handlers",
+    "type": "java.lang.String",
+    "description": "A description for 'handlers'"
+  },
+  {
+    "name": "java.util.logging.ConsoleHandler.level",
+    "type": "java.lang.String",
+    "description": "A description for 'java.util.logging.ConsoleHandler.level'"
+  },
+  {
+    "name": "java.util.logging.ConsoleHandler.formatter",
+    "type": "java.lang.String",
+    "description": "A description for 'java.util.logging.ConsoleHandler.formatter'"
+  },
+  {
+    "name": "java.util.logging.FileHandler.level",
+    "type": "java.lang.String",
+    "description": "A description for 'java.util.logging.FileHandler.level'"
+  },
+  {
+    "name": "java.util.logging.FileHandler.pattern",
+    "type": "java.lang.String",
+    "description": "A description for 'java.util.logging.FileHandler.pattern'"
+  },
+  {
+    "name": "java.util.logging.FileHandler.append",
+    "type": "java.lang.String",
+    "description": "A description for 'java.util.logging.FileHandler.append'"
+  },
+  {
+    "name": "java.util.logging.FileHandler.formatter",
+    "type": "java.lang.String",
+    "description": "A description for 'java.util.logging.FileHandler.formatter'"
+  },
+  {
+    "name": "java.util.logging.ConsoleHandler.level",
+    "type": "java.lang.String",
+    "description": "A description for 'java.util.logging.ConsoleHandler.level'"
+  },
+  {
+    "name": "java.util.logging.FileHandler.level",
+    "type": "java.lang.String",
+    "description": "A description for 'java.util.logging.FileHandler.level'"
+  },
+  {
+    "name": "java.util.logging.FileHandler.pattern",
+    "type": "java.lang.String",
+    "description": "A description for 'java.util.logging.FileHandler.pattern'"
+  },
+  {
+    "name": "java.util.logging.FileHandler.append",
+    "type": "java.lang.String",
+    "description": "A description for 'java.util.logging.FileHandler.append'"
+  },
+  {
+    "name": "java.util.logging.FileHandler.formatter",
+    "type": "java.lang.String",
+    "description": "A description for 'java.util.logging.FileHandler.formatter'"
+  },
+  {
+    "name": "java.util.logging.FileHandler.append",
+    "type": "java.lang.String",
+    "description": "A description for 'java.util.logging.FileHandler.append'"
+  },
+  {
+    "name": "redis.uri",
+    "type": "java.lang.String",
+    "description": "A description for 'redis.uri'"
+  }
+]}
