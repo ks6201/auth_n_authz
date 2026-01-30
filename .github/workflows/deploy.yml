@@ -29,8 +29,15 @@ jobs:
           export JWT_SEC
           export AUTH_N_AUTHZ_DB_URL
 
-          cd ~/projects/auth_n_authz
-          docker compose up -d
+          cd ~/projects/auth_n_authz 
+          
+          git fetch origin 
+          git reset --hard origin/master 
+          
+          docker compose build 
+          docker compose up -d 
+          docker image prune -f
+
           EOF
 
 
