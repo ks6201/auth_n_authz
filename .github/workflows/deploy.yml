@@ -9,28 +9,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          printf "%s" "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
-
       - name: Deploy on VPS
+        uses: appleboy/ssh-action@v1.0.0
         env:
           JWT_SEC: ${{ secrets.JWT_SEC }}
           AUTH_N_AUTHZ_DB_URL: ${{ secrets.AUTH_N_AUTHZ_DB_URL }}
-        run: |
-          ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes -T \
-            ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << EOF
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
             set -e
 
-            # Fail fast if secret is missing
-            : "\${JWT_SEC:?JWT_SEC is missing}"
-
-            export JWT_SEC="${JWT_SEC}"
-            export AUTH_N_AUTHZ_DB_URL="${AUTH_N_AUTHZ_DB_URL}"
+            # Fail fast if secrets are missing or empty
+            : "${JWT_SEC:?JWT_SEC is missing}"
+            : "${AUTH_N_AUTHZ_DB_URL:?AUTH_N_AUTHZ_DB_URL is missing}"
 
             cd ~/projects/auth_n_authz
             git fetch origin
@@ -39,4 +32,3 @@ jobs:
             docker compose build
             docker compose up -d
             docker image prune -f
-          EOF
