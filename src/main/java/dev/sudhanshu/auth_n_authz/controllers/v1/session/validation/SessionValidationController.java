@@ -1,5 +1,7 @@
 package dev.sudhanshu.auth_n_authz.controllers.v1.session.validation;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -32,16 +34,12 @@ public class SessionValidationController {
         @CookieValue(value = Constants.STATEFUL_AUTH_COOKIE_NAME, required = false) String cookieBasedSessionId
     ) {
 
-        String token = cookieBasedSessionId != null ? 
-            cookieBasedSessionId : authzHeader != null ? 
-            Utils.extractTokenFromAuthzHeader(authzHeader) : 
-            (sessionBody != null ? sessionBody.token() : null);
-
-        if(token == null) {
-            throw new HttpBadRequestException(
-                "No session token provided."
-            );
-        }
+        String token = Optional.ofNullable(cookieBasedSessionId)
+                .or(() -> Optional.ofNullable(authzHeader).flatMap(Utils::extractTokenFromAuthzHeaderValue))
+                .or(() -> Optional.ofNullable(sessionBody).map(SessionValidationRequestDTO::token))
+                .orElseThrow(() -> new HttpBadRequestException(
+                    "No session token provided."
+                ));
 
         var command = new SessionValidateCommand(token);
 
@@ -59,10 +57,12 @@ public class SessionValidationController {
         @CookieValue(value = Constants.STATEFUL_AUTH_COOKIE_NAME, required = false) String cookieBasedSessionId
     ) {
 
-        String token = cookieBasedSessionId != null ? 
-            cookieBasedSessionId : authzHeader != null ? 
-            Utils.extractTokenFromAuthzHeader(authzHeader) : 
-            (sessionBody != null ? sessionBody.token() : null);
+        String token = Optional.ofNullable(cookieBasedSessionId)
+                .or(() -> Optional.ofNullable(authzHeader).flatMap(Utils::extractTokenFromAuthzHeaderValue))
+                .or(() -> Optional.ofNullable(sessionBody).map(SessionValidationRequestDTO::token))
+                .orElseThrow(() -> new HttpBadRequestException(
+                    "No session token provided."
+                ));
 
         if(token == null) {
             throw new HttpBadRequestException(

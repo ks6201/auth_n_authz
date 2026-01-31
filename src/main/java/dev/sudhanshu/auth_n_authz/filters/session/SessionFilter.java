@@ -98,9 +98,9 @@ public class SessionFilter extends OncePerRequestFilter {
         }
 
         // 3️⃣ Authorization header
-        String token = Utils.extractTokenFromAuthzHeader(
+        String token = Utils.extractTokenFromAuthzHeaderValue(
                 request.getHeader(HttpHeaders.AUTHORIZATION)
-        );
+        ).orElseThrow(() -> new HttpUnauthorizedException());
 
         return new SessionTokenExtractionResult(token, SessionTokenType.UNKNOWN);
     }

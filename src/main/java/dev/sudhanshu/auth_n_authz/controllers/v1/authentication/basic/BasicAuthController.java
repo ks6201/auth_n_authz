@@ -118,7 +118,7 @@ public class BasicAuthController {
         var result = this.passwordAuthService.createUser(createUserCommand);
 
         URI location = URI.create(
-            Utils.USER_CREATED_AT_ROUTE.apply(result.userId().toString())
+            Utils.buildUserCreatedAtRoute(result.userId().toString())
         );
 
         var responseDto = new BasicAuthSignupResponseDTO(
