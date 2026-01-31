@@ -1,4 +1,4 @@
-package dev.sudhanshu.auth_n_authz.controllers.v1.authentication.basic.dtos;
+package dev.sudhanshu.auth_n_authz.controllers.v1.authentication.dtos;
 
 import dev.sudhanshu.auth_n_authz.libs.Constants;
 import lombok.AllArgsConstructor;

@@ -129,9 +129,16 @@ public class BasicAuthServiceImpl implements BasicAuthService {
             throw new InvalidCredentialsException();
         }
         
-        var token = this.jwtProvider.sign(user.getEmail());
+        var token = createStatelessToken(user.getEmail());
 
         return new StatelessLoginResult(token);
+    }
+
+    @Override
+    public String createStatelessToken(String claim) {
+        var token = this.jwtProvider.sign(claim);
+
+        return token;
     }
 
 
@@ -151,11 +158,18 @@ public class BasicAuthServiceImpl implements BasicAuthService {
             throw new InvalidCredentialsException();
         }
 
-        var sessionId = UUID.randomUUID().toString();
-        
-        this.sessionRepository.store(sessionId);
+        var sessionId = createStatefulSession(loginCommand.email());
 
         return new StatefulLoginResult(sessionId);
+    }
+
+    @Override
+    public String createStatefulSession(String claim) {
+        var sessionId = UUID.randomUUID().toString();
+        
+        this.sessionRepository.store(sessionId, claim);
+
+        return sessionId;
     }
 
     @Override

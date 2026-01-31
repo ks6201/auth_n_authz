@@ -19,11 +19,12 @@ public class RedisSessionRepository implements SessionRepository {
     private final String KEY_PREFIX = "stateful-session";
 
     public boolean store(
-        String sessionId
+        String sessionId,
+        String claim
     ) {
         var key = Utils.buildRedisKey(this.KEY_PREFIX, sessionId);
 
-        return this.redis.set(key, sessionId, Constants.COOKIE_EXPIRY_MS);
+        return this.redis.set(key, claim, Constants.COOKIE_EXPIRY_MS);
     }
     
     public boolean deleteSession(

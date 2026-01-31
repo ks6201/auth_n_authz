@@ -9,7 +9,9 @@ import dev.sudhanshu.auth_n_authz.services.authentication.basic.results.Stateles
 
 public interface BasicAuthService {
     StatelessLoginResult statelessAuthenticate(LoginCommand loginCommand);
+    String createStatelessToken(String claim);
     StatefulLoginResult statefulAuthenticate(LoginCommand loginCommand);
+    String createStatefulSession(String claim);
     void statelessLogout(LogoutCommand logoutCommand);
     void statefulLogout(LogoutCommand logoutCommand);
     CreateUserResult createUser(CreateUserCommand createUserCommand);

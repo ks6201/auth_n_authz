@@ -2,11 +2,11 @@ package dev.sudhanshu.auth_n_authz.controllers.v1.authentication.basic;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import dev.sudhanshu.auth_n_authz.controllers.v1.authentication.basic.dtos.CookieOptionQueryDTO;
 import dev.sudhanshu.auth_n_authz.controllers.v1.authentication.basic.dtos.BasicAuthLoginRequestDTO;
 import dev.sudhanshu.auth_n_authz.controllers.v1.authentication.basic.dtos.BasicAuthLoginResponseDTO;
 import dev.sudhanshu.auth_n_authz.controllers.v1.authentication.basic.dtos.BasicAuthSignupRequestDTO;
 import dev.sudhanshu.auth_n_authz.controllers.v1.authentication.basic.dtos.BasicAuthSignupResponseDTO;
+import dev.sudhanshu.auth_n_authz.controllers.v1.authentication.dtos.CookieOptionQueryDTO;
 import dev.sudhanshu.auth_n_authz.libs.Constants;
 import dev.sudhanshu.auth_n_authz.libs.Utils;
 import dev.sudhanshu.auth_n_authz.libs.payload.APIResponse;
@@ -42,6 +42,7 @@ public class BasicAuthController {
             loginCreds.email(), 
             loginCreds.password()
         );
+        
         var result = passwordAuthService.statelessAuthenticate(loginCommand);
 
         var responseDto = new BasicAuthLoginResponseDTO(

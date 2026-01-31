@@ -17,9 +17,9 @@ public class Utils {
 
     public static String buildRedisKey(
         String prefix,
-        String value
+        String uniqueValue
     ) {
-        return DIGEST_HASHER.hash(prefix + ":" + value);
+        return DIGEST_HASHER.hash(prefix + ":" + uniqueValue);
     }
 
     public static Optional<String> extractTokenFromAuthzHeaderValue(String header) {
