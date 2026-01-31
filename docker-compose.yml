@@ -8,6 +8,8 @@ services:
       JWT_SEC: ${JWT_SEC}
       REDIS_URI: redis://redis:6379
       AUTH_N_AUTHZ_DB_URL: ${AUTH_N_AUTHZ_DB_URL}
+      AUTH_N_AUTHZ_DOMAIN: ${AUTH_N_AUTHZ_DOMAIN}
+      AUTH_N_AUTHZ_PROTOCOL: ${AUTH_N_AUTHZ_PROTOCOL}
     depends_on:
       - redis
     networks:
