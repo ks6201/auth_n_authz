@@ -3,7 +3,6 @@ package dev.sudhanshu.auth_n_authz.services.authentication.basic;
 
 import java.util.Optional;
 import java.util.UUID;
-import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -30,7 +29,9 @@ import dev.sudhanshu.auth_n_authz.services.authentication.basic.results.Stateful
 import dev.sudhanshu.auth_n_authz.services.authentication.basic.results.StatelessLoginResult;
 import dev.sudhanshu.auth_n_authz.services.session.validation.stateless.StatelessSessionValidationService;
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class BasicAuthServiceImpl implements BasicAuthService {
 
@@ -55,8 +56,6 @@ public class BasicAuthServiceImpl implements BasicAuthService {
     @Autowired
     StatelessSessionValidationService statelessSessionValidationService;
 
-
-    private static final Logger logger = Logger.getLogger(BasicAuthServiceImpl.class.getName());
 
     @Override
     @Transactional
@@ -123,7 +122,7 @@ public class BasicAuthServiceImpl implements BasicAuthService {
             .verify(loginCommand.password(), user.getPassword());
 
         if(!wasSuccess) {
-            BasicAuthServiceImpl.logger.info(
+            log.info(
                 "Credential didn't match for email: '" + loginCommand.email() + "'."
             );
             throw new InvalidCredentialsException();
@@ -152,7 +151,7 @@ public class BasicAuthServiceImpl implements BasicAuthService {
             .verify(loginCommand.password(), user.getPassword());
 
         if(!wasSuccess) {
-            BasicAuthServiceImpl.logger.info(
+            log.info(
                 "Credential didn't match for email: '" + loginCommand.email() + "'."
             );
             throw new InvalidCredentialsException();
@@ -178,7 +177,7 @@ public class BasicAuthServiceImpl implements BasicAuthService {
         var isBlacklisted = this.blacklistRepository.isBlacklisted(logoutCommand.sessionToken());
 
         if(isBlacklisted) {
-            BasicAuthServiceImpl.logger.info(
+            log.info(
                 "User having with token '" + logoutCommand.sessionToken() + "' already logged out."
             );
             throw new UserAlreadyLoggedOutException();
@@ -188,7 +187,7 @@ public class BasicAuthServiceImpl implements BasicAuthService {
 
         if(wasSuccess) return;
     
-        BasicAuthServiceImpl.logger.info(
+        log.info(
             "User having with token '" + logoutCommand.sessionToken() + "' logged out attempt failed."
         );
 
@@ -202,7 +201,7 @@ public class BasicAuthServiceImpl implements BasicAuthService {
 
         if(wasSuccess) return;
 
-        BasicAuthServiceImpl.logger.info(
+        log.info(
             "User having with token '" + logoutCommand.sessionToken() + "' logged out attempt failed."
         );
 
