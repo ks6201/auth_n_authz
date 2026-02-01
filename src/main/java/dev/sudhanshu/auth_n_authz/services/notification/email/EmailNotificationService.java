@@ -7,7 +7,9 @@ import dev.sudhanshu.auth_n_authz.libs.exceptions.http.HttpInternalServerExcepti
 import dev.sudhanshu.auth_n_authz.libs.mailer.Mailer;
 import dev.sudhanshu.auth_n_authz.libs.mailer.exceptions.EmailSendFailedException;
 import dev.sudhanshu.auth_n_authz.services.notification.NotificationService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class EmailNotificationService implements NotificationService<SendEmailCommand> {
 
@@ -23,6 +25,7 @@ public class EmailNotificationService implements NotificationService<SendEmailCo
                 command.body()
             );
         } catch (EmailSendFailedException e) {
+            log.error(e.getMessage());
             throw new HttpInternalServerException();
         }
 
