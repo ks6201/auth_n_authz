@@ -6,7 +6,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
 import dev.sudhanshu.auth_n_authz.libs.mailer.exceptions.EmailSendFailedException;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component
 public class SpringMailer implements Mailer {
 
@@ -36,6 +38,7 @@ public class SpringMailer implements Mailer {
              * MailSendException - in case of failure when sending the message
              * MailException
             */
+           log.error(e.getMessage());
            throw new EmailSendFailedException();
         }
     }
