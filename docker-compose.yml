@@ -10,6 +10,7 @@ services:
       AUTH_N_AUTHZ_DB_URL: ${AUTH_N_AUTHZ_DB_URL}
       AUTH_N_AUTHZ_DOMAIN: ${AUTH_N_AUTHZ_DOMAIN}
       AUTH_N_AUTHZ_PROTOCOL: ${AUTH_N_AUTHZ_PROTOCOL}
+      AUTH_N_AUTHZ_LOG_FILE_NAME: ${AUTH_N_AUTHZ_LOG_FILE_NAME}
     depends_on:
       - redis
     networks:
