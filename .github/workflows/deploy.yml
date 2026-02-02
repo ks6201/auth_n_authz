@@ -35,6 +35,11 @@ jobs:
           docker compose up -d 
           docker image prune -f
 
+          docker stop registry
+          docker rm registry
+
+          docker run -d --name registry -p 127.0.0.1:5000:5000 --restart always registry:2
+
           EOF
 
 
