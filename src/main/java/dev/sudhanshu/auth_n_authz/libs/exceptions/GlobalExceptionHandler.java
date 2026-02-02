@@ -1,7 +1,8 @@
 package dev.sudhanshu.auth_n_authz.libs.exceptions;
 
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Logger;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,11 +12,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import dev.sudhanshu.auth_n_authz.libs.payload.APIResponse;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    private static final Logger logger = Logger.getLogger(GlobalExceptionHandler.class.getName());
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<APIResponse<String>> exceptionHandler(
@@ -28,7 +29,7 @@ public class GlobalExceptionHandler {
         exception.printStackTrace();
 
         // Add exception class info so it can be handled if needed.
-        log.error(exception.getMessage());
+        logger.severe(exception.getMessage());
         
         return new ResponseEntity<>(
             response,
@@ -66,7 +67,7 @@ public class GlobalExceptionHandler {
     ) {
         String message = exception.getMessage();
 
-        log.error(message);
+        logger.severe(message);
 
         APIResponse<String> response = APIResponse.error(message);
 

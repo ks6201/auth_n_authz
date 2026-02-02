@@ -1,6 +1,6 @@
 services:
   app:
-    image: auth_n_authz
+    image: registry.sudhanshu.dev/auth_n_authz:1.0
     build: .
     ports:
       - "8080:8080"

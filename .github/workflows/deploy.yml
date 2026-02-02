@@ -25,11 +25,13 @@ jobs:
 
           cd ~/projects/auth_n_authz 
 
-          git fetch origin 
+          git fetch origin
           git reset --hard origin/master 
           
           docker compose down
-          docker compose build 
+          
+          docker compose pull 
+
           docker compose up -d 
           docker image prune -f
 
